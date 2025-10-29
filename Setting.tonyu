@@ -1,5 +1,6 @@
 $title="四則演算シューティング（未定）";
 $Screen.setBGColor("black");
+$Screen.resize(640,480);
 
 //----その他，ゲーム画面を開いたときに初期化したいことはここで
 
