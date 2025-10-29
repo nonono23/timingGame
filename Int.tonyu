@@ -1,0 +1,12 @@
+//説明・チュートリアル
+$int="ここに説明";
+
+
+//表示
+new Label{
+    text=$int, 
+    x=$screenWidth/2,
+    y=100,
+    size=35,
+    color="white",
+};

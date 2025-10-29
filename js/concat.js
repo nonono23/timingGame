@@ -1,5 +1,5 @@
 if(!Tonyu.load)Tonyu.load=(_,f)=>f();
-Tonyu.load({"compiler":{"namespace":"user","defaultSuperClass":"kernel.Actor","dependingProjects":[{"namespace":"kernel"}]},"run":{"mainClass":"user.Main","bootClass":"kernel.Boot","globals":{"$defaultFPS":60,"$imageSmoothingDisabled":true,"$soundLoadAndDecode":false}},"plugins":{},"kernelEditable":false,"language":"tonyu","version":1740040693405}, ()=>{
+Tonyu.load({"compiler":{"namespace":"user","defaultSuperClass":"kernel.Actor","dependingProjects":[{"namespace":"kernel"}]},"run":{"mainClass":"user.Setting","bootClass":"kernel.Boot","globals":{"$defaultFPS":60,"$imageSmoothingDisabled":true,"$soundLoadAndDecode":false}},"plugins":{},"kernelEditable":false,"language":"tonyu","version":1740040693405}, ()=>{
 Tonyu.klass.define({
   fullName: 'user.Bullet',
   shortName: 'Bullet',
@@ -215,6 +215,110 @@ Tonyu.klass.define({
           (yield* _this.fiber$update(_thread));
           
         }
+        
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false,"isMain":true,"vtype":{"params":[],"returnValue":null}}},"fields":{}}
+});
+Tonyu.klass.define({
+  fullName: 'user.Setting',
+  shortName: 'Setting',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_Setting_main() {
+        var _this=this;
+        
+        Tonyu.globals.$title="四則演算シューティング（未定）";
+        Tonyu.globals.$Screen.setBGColor("black");
+        _this.loadPage(Tonyu.classes.user.Title);
+      },
+      fiber$main :function* _trc_Setting_f_main(_thread) {
+        var _this=this;
+        
+        Tonyu.globals.$title="四則演算シューティング（未定）";
+        Tonyu.globals.$Screen.setBGColor("black");
+        (yield* _this.fiber$loadPage(_thread, Tonyu.classes.user.Title));
+        
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false,"isMain":true,"vtype":{"params":[],"returnValue":null}}},"fields":{}}
+});
+Tonyu.klass.define({
+  fullName: 'user.Title',
+  shortName: 'Title',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_Title_main() {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.Label({text: Tonyu.globals.$title,x: Tonyu.globals.$screenWidth/2,y: 100,size: 35,color: "white"});
+        new Tonyu.classes.kernel.Button({text: "Start",top: 220,onClick: Tonyu.bindFunc(_this,_this.start)});
+        new Tonyu.classes.kernel.Button({text: "遊び方",top: 320,onClick: Tonyu.bindFunc(_this,_this.warp)});
+      },
+      fiber$main :function* _trc_Title_f_main(_thread) {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.Label({text: Tonyu.globals.$title,x: Tonyu.globals.$screenWidth/2,y: 100,size: 35,color: "white"});
+        new Tonyu.classes.kernel.Button({text: "Start",top: 220,onClick: Tonyu.bindFunc(_this,_this.start)});
+        new Tonyu.classes.kernel.Button({text: "遊び方",top: 320,onClick: Tonyu.bindFunc(_this,_this.warp)});
+        
+      },
+      start :function _trc_Title_start() {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.FadeEffect({type: "out",page: Tonyu.classes.user.Main});
+      },
+      fiber$start :function* _trc_Title_f_start(_thread) {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.FadeEffect({type: "out",page: Tonyu.classes.user.Main});
+        
+      },
+      warp :function _trc_Title_warp() {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.FadeEffect({type: "out",page: Tonyu.classes.user.Int});
+      },
+      fiber$warp :function* _trc_Title_f_warp(_thread) {
+        var _this=this;
+        
+        new Tonyu.classes.kernel.FadeEffect({type: "out",page: Tonyu.classes.user.Int});
+        
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false,"isMain":true,"vtype":{"params":[],"returnValue":null}},"start":{"nowait":false,"isMain":false,"vtype":{"params":[],"returnValue":null}},"warp":{"nowait":false,"isMain":false,"vtype":{"params":[],"returnValue":null}}},"fields":{}}
+});
+Tonyu.klass.define({
+  fullName: 'user.Int',
+  shortName: 'Int',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_Int_main() {
+        var _this=this;
+        
+        Tonyu.globals.$int="ここに説明";
+        new Tonyu.classes.kernel.Label({text: Tonyu.globals.$int,x: Tonyu.globals.$screenWidth/2,y: 100,size: 35,color: "white"});
+      },
+      fiber$main :function* _trc_Int_f_main(_thread) {
+        var _this=this;
+        
+        Tonyu.globals.$int="ここに説明";
+        new Tonyu.classes.kernel.Label({text: Tonyu.globals.$int,x: Tonyu.globals.$screenWidth/2,y: 100,size: 35,color: "white"});
         
       },
       __dummy: false

@@ -1,0 +1,29 @@
+//タイトル表示
+new Label{
+    text=$title, 
+    x=$screenWidth/2,
+    y=100,
+    size=35,
+    color="white",
+};
+
+//スタート
+new Button{
+    text="Start",
+    top=220,
+    onClick=start,
+};
+\start() {
+    new FadeEffect{type="out",page=Main};
+}
+
+
+//説明・チュートリアル
+new Button{
+    text="遊び方",
+    top=320,
+    onClick=warp,
+};
+\warp() {
+    new FadeEffect{type="out",page=Int};
+}
