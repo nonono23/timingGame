@@ -1,0 +1,26 @@
+//チュートリアル
+//ちゃんとゲームが完成したらコピペして中の設定いじって無敵時間無制限版にする
+$int="チュートリアル画面開発待";
+
+//表示
+new Label{
+    text=$int, 
+    x=$screenWidth/2,
+    y=100,
+    size=35,
+    color="white",
+};
+
+//タイトルへ
+new Button{
+    text="タイトルへ",
+    top=425,
+    left=530,
+    width=100,
+    onClick=start,
+};
+\start() {
+    new FadeEffect{type="out",page=Title};
+}
+
+

@@ -1,0 +1,25 @@
+//ここは説明ページ
+$int="ここに説明（計算してね(^▽^)/";
+
+
+//text表示
+new Label{
+    text=$int, 
+    x=$screenWidth/2,
+    y=100,
+    size=35,
+    color="white",
+};
+
+//練習モードへ
+new Button{
+    text="練習へ",
+    top=425,
+    left=410,
+    width=200,
+
+    onClick=start,
+};
+\start() {
+    new FadeEffect{type="out",page=Tutorial};
+}
