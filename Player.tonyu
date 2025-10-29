@@ -1,0 +1,15 @@
+//Player
+while (true) {
+    if (getkey("a") > 0) x -= 4.5;
+    if (getkey("d") > 0) x += 4.5;
+    if(x>460){
+        x=460;
+    }
+    if(x<10){
+        x=10;
+    }
+    if(getkey("space")==1){
+        new Bullet{x=x, y=y, p=25};
+    }
+    update();
+}

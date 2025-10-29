@@ -1,0 +1,14 @@
+//Bullet
+num=0;
+$timeFrame=0;
+while(y>0){
+    t=$timeFrame%6;
+    if(t==0 && num<9){
+        num++;
+    };
+    print(num);
+    y=y-6;
+    $timeFrame++;
+    update();
+}
+die();

@@ -1,0 +1,13 @@
+//Enemy
+x=this.x;
+y=this.y;
+while(true){
+    x+=2;
+    b = crashTo(Bullet);
+    if(b){
+        b.die();
+        die();
+
+    }
+    update();
+}
