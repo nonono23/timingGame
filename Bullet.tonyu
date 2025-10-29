@@ -1,6 +1,7 @@
 //Bullet
 num=0;
 $timeFrame=0;
+$bulletNum=true;
 while(y>0){
     t=$timeFrame%6;
     if(t==0 && num<9){
@@ -11,4 +12,5 @@ while(y>0){
     $timeFrame++;
     update();
 }
+$bulletNum=false;
 die();

@@ -8,10 +8,9 @@ while (true) {
     if(x<10){
         x=10;
     }
-    if(getkey("space")==1){
+    if(getkey("space")==1 && !$bulletNum){
         new Bullet{x=x, y=y, p=25};
     }
     update();
 }
 
-//aaaa

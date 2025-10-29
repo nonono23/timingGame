@@ -5,9 +5,9 @@ while(true){
     x+=2;
     b = crashTo(Bullet);
     if(b){
+        $bulletNum=false;
         b.die();
         die();
-
     }
     update();
 }
