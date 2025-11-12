@@ -1,13 +1,45 @@
-//Enemy
-x=this.x;
-y=this.y;
-while(true){
-    x+=2;
+// Enemy.tonyu
+x = this.x;
+y = this.y;
+
+// 敵が持つ数値（1〜9）
+value = rnd(1, 10);
+
+// 表示ラベル
+this.label = new Label { text: value, x: x, y: y, size: 32, color: "Red" };
+
+while (true) {
+    x += 3;
+    this.label.x = x;
+    this.label.y = y;
+
+    // 弾との当たり判定
     b = crashTo(Bullet);
-    if(b){
-        $bulletNum=false;
+    if (b) {
+        // 計算処理
+        result = this.value + b.value; // ← ここで計算！
+
+        rlabel = new Label { text: result, x: x, y: y - 20, size: 24, color: "red" };
+        for (i = 0; i < 30; i++) {
+            rlabel.y -= 0.5;
+            update();
+        }
+        rlabel.die();
+        
+        if (b.label) b.label.die();
+        
+        // 弾と敵を削除
+        $bulletNum = false;
         b.die();
+        label.die();
         die();
     }
+
+    // 画面外に出たら削除
+    if (x > screenWidth + 50) {
+        label.die();
+        die();
+    }
+
     update();
 }
