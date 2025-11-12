@@ -10,7 +10,7 @@ while (true) {
 
     // 弾が存在しないときだけ発射
     if (getkey("space") == 1 && !$bulletNum) {
-        new Bullet { x: x, y: y, p: 25 };
+        new Bullet { x: x, y: y};
     }
 
     update();

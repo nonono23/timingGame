@@ -3,8 +3,9 @@ $Screen.resize(640,480);
 new Player { x: 200, y: 430, p: 27 };
 c=0;
 while(true){
-    if(c%250000==0){
-        new Enemy{x=0,y=rnd(20,150),p=26};
+    if(c%35==0){
+        new Enemy{x=0,y=rnd(20,150)};
     }
     c++;
+    update();
 }

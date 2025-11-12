@@ -1,20 +1,33 @@
 //Bullet
 num=0;
-$timeFrame=0;
+timeFrame=0;
 $bulletNum=true;
+label = new Label { text: num, x: x, y: y, size: 24, color: "yellow" };
+this.value = num;
+
 while(y>0){
-    t=$timeFrame%6;
+    t=timeFrame%6;
     if(t==0 && num<9){
         num++;
-    };
-    print(num);
+        this.value = num;    
+        this.label.text = num; 
+    }
     d=crashTo(Enemy);
     if(d){
         $bulletNum=false;
+        result = num + d.value;
+        print("弾(" + num + ") + 敵(" + d.value + ") = " + result);
+        label.die();
+        d.label.die();
+        d.die();
+        die();
     }
     y=y-6;
-    $timeFrame++;
+    label.x = x;
+    label.y = y;
+    timeFrame++;
     update();
 }
+if (this.label) this.label.die();
 $bulletNum=false;
 die();
