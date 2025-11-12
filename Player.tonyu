@@ -8,10 +8,15 @@ while (true) {
     if(x<10){
         x=10;
     }
+<<<<<<< Updated upstream
     if(getkey("space")==1 && !$bulletNum){
         if(getkey("space")==1 && !$bulletNum ){
             new Bullet{x=x, y=y, p=25};
         }
         update();
+=======
+    if(getkey("space")==1 && !$bulletNum ){
+        new Bullet{x=x, y=y, p=25};
+>>>>>>> Stashed changes
     }
 
