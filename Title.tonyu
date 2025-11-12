@@ -33,3 +33,13 @@ new Button{
 }
 
 //test用
+new Button{
+    text="test",
+    top=280,
+    width=350,
+    left=160,
+    onClick=warp2,
+};
+\warp2() {
+    new FadeEffect{type="out",page=Result};
+}

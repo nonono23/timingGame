@@ -1,0 +1,33 @@
+$int_t="操作のしかた";
+$int_s="自ユニット：？？？？\n \n 弾速：？？？？\n\n 発射：spaceキー";
+
+//text表示
+new Label{
+    text=$int_t, 
+    x=$screenWidth/2,
+    y=100,
+    size=42,
+    color="white",
+};
+
+new Label{
+    text=$int_s, 
+    x=$screenWidth/2,
+    y=150,
+    size=22,
+    color="white",
+};
+
+
+//練習モードへ
+new Button{
+    text="練習へ",
+    top=425,
+    left=410,
+    width=200,
+
+    onClick=start,
+};
+\start() {
+    new FadeEffect{type="out",page=Tutorial};
+}

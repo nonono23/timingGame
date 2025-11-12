@@ -1,0 +1,37 @@
+//結果画面
+
+
+
+
+new Button{
+    text="リスタート",
+    top=425,
+    width=200,
+    left=410,
+    onClick=start,
+};
+\start() {
+    new FadeEffect{type="out",page=Main};
+}
+
+
+new Button{
+    text="タイトルへ",
+    top=425,
+    width=200,
+    left=10,
+    onClick=Warp,
+};
+\Warp() {
+    new FadeEffect{type="out",page=Title};
+}
+
+
+
+
+
+
+
+
+
+

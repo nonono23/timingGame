@@ -1,5 +1,5 @@
 //ここは説明ページ
-$int="ここに説明（計算してね(^▽^)/";
+$int="流れてくる敵に自分の弾を当てて\n 画面右上に表示される問題に従って答えを目指そう\n \n時間経過で弾の数字は大きくなるぞ\n \n3回間違えるとゲームオーバー！！\n \nたくさん計算して高スコアを目指そう";
 
 
 //text表示
@@ -7,13 +7,13 @@ new Label{
     text=$int, 
     x=$screenWidth/2,
     y=100,
-    size=35,
+    size=22,
     color="white",
 };
 
-//練習モードへ
+//2ページ目
 new Button{
-    text="練習へ",
+    text="次へ",
     top=425,
     left=410,
     width=200,
@@ -21,5 +21,5 @@ new Button{
     onClick=start,
 };
 \start() {
-    new FadeEffect{type="out",page=Tutorial};
+    new FadeEffect{type="out",page=Explain2};
 }
