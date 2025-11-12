@@ -1,22 +1,17 @@
-//Player
+// Player.tonyu
 while (true) {
+    // 移動処理
     if (getkey("a") > 0) x -= 4.5;
     if (getkey("d") > 0) x += 4.5;
-    if(x>460){
-        x=460;
-    }
-    if(x<10){
-        x=10;
-    }
-<<<<<<< Updated upstream
-    if(getkey("space")==1 && !$bulletNum){
-        if(getkey("space")==1 && !$bulletNum ){
-            new Bullet{x=x, y=y, p=25};
-        }
-        update();
-=======
-    if(getkey("space")==1 && !$bulletNum ){
-        new Bullet{x=x, y=y, p=25};
->>>>>>> Stashed changes
+
+    // 画面端制限
+    if (x > 460) x = 460;
+    if (x < 10) x = 10;
+
+    // 弾が存在しないときだけ発射
+    if (getkey("space") == 1 && !$bulletNum) {
+        new Bullet { x: x, y: y, p: 25 };
     }
 
+    update();
+}
