@@ -8,6 +8,10 @@ while(y>0){
         num++;
     };
     print(num);
+    d=crashTo(Enemy);
+    if(d){
+        $bulletNum=false;
+    }
     y=y-6;
     $timeFrame++;
     update();
