@@ -18,26 +18,19 @@ while (true) {
     if (b) {
         // 計算処理
         result = this.value + b.value; // ← ここで計算！
-
-        rlabel = new Label { text: result, x: x, y: y - 20, size: 24, color: "red" };
-        for (i = 0; i < 30; i++) {
-            rlabel.y -= 0.5;
-            update();
-        }
-        rlabel.die();
-        
+        print("Enemy(" + this.value + ") + Bullet(" + b.value + ") = " + result);
         if (b.label) b.label.die();
         
         // 弾と敵を削除
         $bulletNum = false;
         b.die();
-        label.die();
+        this.label.die();
         die();
     }
 
     // 画面外に出たら削除
     if (x > screenWidth + 50) {
-        label.die();
+        this.label.die();
         die();
     }
 
