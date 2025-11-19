@@ -32,7 +32,9 @@ new Button{
     new FadeEffect{type="out",page=Explain};
 }
 
-//test用
+
+
+//test用,本番では削除
 new Button{
     text="test",
     top=280,
@@ -43,3 +45,9 @@ new Button{
 \warp2() {
     new FadeEffect{type="out",page=Result};
 }
+
+
+
+
+//背景おもちゃ
+new Bg{x:$screenWidth/1.80,y:$screenHeight/1.80,p:$pat_T2_haikei,zOrder:1};

@@ -1,10 +1,11 @@
 //結果画面
-score = 100;
+score = 428;
+rank=getRank(score);
 
 // RESULT タイトル
 new Label {
     text="RESULT",
-    size=48,
+    size=50,
     color="white",
     x=$screenWidth/2,
     y=100,
@@ -14,9 +15,18 @@ new Label {
 new Label {
     text="SCORE: " + score,
     size=40,
-    color="yellow",
+    color="white",
     x=$screenWidth/2,
     y=200,
+};
+
+//　ランク
+new Label {
+    text="RANK: " + rank,
+    size=40,
+    color="white",
+    x=$screenWidth/2,
+    y=250,
 };
 
 // リスタートボタン
@@ -45,6 +55,21 @@ new Button{
     new FadeEffect { type:"out", page: Title };
 }
 
+
+//ランク判定
+\getRank(score) {
+    if (score < 50) return "E";
+    if (score < 70) return "E+";
+    if (score < 100) return "D";
+    if (score < 150) return "D+";
+    if (score < 200) return "C";
+    if (score < 260) return "C+";
+    if (score < 330) return "B";
+    if (score < 400) return "B+";
+    if (score < 480) return "A";
+    if (score < 550) return "A+";
+    return "S"; 
+}
 
 
 
