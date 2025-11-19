@@ -1,11 +1,31 @@
 //Main
+print("MAIN start: target=" + $targetResult + " score=" + $score + " hp=" + $hp + " bulletspeed=" + $bulletSpeed);
 $Screen.resize(640,480);
+$targetResult = rnd(2, 19);  
+$score = 0;                  
+$hp = 3;                     
+$bulletSpeed = 6;            
+
+$infoLabel = new Label { 
+    text: "",
+    x: 520, 
+    y: 20,
+    size: 18,
+    color: "white"
+};
+
+$infoLabel.text = "答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
+
 new Player { x: 200, y: 430, p: 27 };
+
 c=0;
 while(true){
     if(c%35==0){
         new Enemy{x=0,y=rnd(20,150)};
     }
+    
+    $infoLabel.text ="答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
+    
     c++;
     update();
 }

@@ -7,6 +7,7 @@ this.value = num;
 
 while(y>0){
     t=timeFrame%6;
+    //print("BULLET created: id=" + this.id + " start x=" + x + " y=" + y + " initialValue=" + this.value);
     if(t==0 && num<9){
         num++;
         this.value = num;    
@@ -14,9 +15,23 @@ while(y>0){
     }
     d=crashTo(Enemy);
     if(d){
+        print("BULLET collision detect: bullet.num=" + num + " bullet.value=" + this.value + " enemy.value=" + d.value + " result=" + result);
         $bulletNum=false;
         result = num + d.value;
         print("弾(" + num + ") + 敵(" + d.value + ") = " + result);
+        
+        if (result == $targetResult) {
+            $score++;
+            print("★正解！ score = " + $score);
+        }else{
+            $hp--;
+            print("x不正解 hp = "+$hp);
+        }
+        
+        $targetResult = rnd(2,19);
+        
+        if($infolabel) $infolabel.text="答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
+        
         if(this.label) this.label.die();
         if (d.label) d.label.die();
         d.die();
