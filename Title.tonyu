@@ -45,3 +45,9 @@ new Button{
 \warp2() {
     new FadeEffect{type="out",page=Result};
 }
+
+
+
+
+//背景おもちゃ
+new Bg{x:$screenWidth/1.80,y:$screenHeight/1.80,p:$pat_T2_haikei,zOrder:1};
