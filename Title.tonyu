@@ -32,7 +32,9 @@ new Button{
     new FadeEffect{type="out",page=Explain};
 }
 
-//test用
+
+
+//test用,本番では削除
 new Button{
     text="test",
     top=280,
