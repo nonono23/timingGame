@@ -18,6 +18,19 @@ new Label{
     color="white",
 };
 
+//前へ
+new Button{
+    text="前へ",
+    top=425,
+    left=10,
+    width=200,
+
+    onClick=warp,
+};
+\warp() {
+    new FadeEffect{type="out",page=Explain};
+}
+
 
 //練習モードへ
 new Button{
