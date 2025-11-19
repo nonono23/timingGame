@@ -1,35 +1,49 @@
 //結果画面
-//スコア表示する、ランク（？）も表示する？、ハイスコア作る？
+score = 100;
 
-
-
-new Button{
-    text="リスタート",
-    top=425,
-    width=200,
-    left=410,
-    onClick=start,
+// RESULT タイトル
+new Label {
+    text="RESULT",
+    size=48,
+    color="white",
+    x=$screenWidth/2,
+    y=100,
 };
+
+// スコア表示
+new Label {
+    text="SCORE: " + score,
+    size=40,
+    color="yellow",
+    x=$screenWidth/2,
+    y=200,
+};
+
+// リスタートボタン
+new Button{
+    text: "リスタート",
+    top: 425,
+    width: 200,
+    left: 410,
+    onClick: start
+};
+
 \start() {
-    new FadeEffect{type="out",page=Main};
+    new FadeEffect { type:"out", page: Main };
 }
 
-
+// タイトルへ
 new Button{
-    text="タイトルへ",
-    top=425,
-    width=200,
-    left=10,
-    onClick=Warp,
+    text: "タイトルへ",
+    top: 425,
+    width: 200,
+    left: 10,
+    onClick: Warp
 };
+
 \Warp() {
-    new FadeEffect{type="out",page=Title};
+    new FadeEffect { type:"out", page: Title };
 }
-
-
-
-
-
 
 
 
