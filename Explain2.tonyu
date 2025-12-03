@@ -1,5 +1,5 @@
 $int_t="操作のしかた";
-$int_s="自ユニット：？？？？\n \n 弾速：？？？？\n\n 発射：spaceキー";
+$int_s="自ユニット（左右）：A,Dキー\n \n 弾速：W,Sキー\n\n 発射：spaceキー";
 
 //text表示
 new Label{
