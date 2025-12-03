@@ -1,36 +1,49 @@
-// Enemy.tonyu
 x = this.x;
 y = this.y;
 
 // 敵が持つ数値（1〜9）
-this.value = rnd(1, 10);
+this.value = rnd(1,9);
 
 // 表示ラベル
-this.label = new Label { text: value, x: x, y: y, size: 32, color: "Red" };
-print("ENEMY created: id=" + this.id + " value=" + this.value + " x=" + x + " y=" + y);
+this.label = new Label {
+    text: this.value,
+    x: x,
+    y: y,
+    size: 28,
+    color: "white"
+};
+
+
+//print("ENEMY created: value=" + this.value + " x=" + x + " y=" + y);
+
 while (true) {
     x += 3;
     this.label.x = x;
     this.label.y = y;
+    
+    //print("ENEMY loop: x=" + x + " y=" + y + " value=" + this.value);
 
     // 弾との当たり判定
-    b = crashTo(Bullet);
+    /*b = crashTo(Bullet);
     if (b) {
-        // 計算処理
-        print("ENEMY collision detect: enemy.value=" + this.value + " b.value=" + b.value + " enemy.x=" + x + " enemy.y=" + y);
-        result = this.value + b.value; // ← ここで計算！
+
+        print("ENEMY collision detect: enemy.value=" + this.value +
+        " b.value=" + b.value + " enemy.x=" + x + " enemy.y=" + y);
+
+        result = this.value + b.value;
         print("Enemy(" + this.value + ") + Bullet(" + b.value + ") = " + result);
+
         if (b.label) b.label.die();
-        
-        // 弾と敵を削除
+
         $bulletNum = false;
         b.die();
         this.label.die();
         die();
-    }
+    }*/
 
     // 画面外に出たら削除
     if (x > screenWidth + 50) {
+        $bulletNum = false;
         if(this.label) this.label.die();
         die();
     }
