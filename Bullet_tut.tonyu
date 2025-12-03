@@ -1,0 +1,79 @@
+//HPが変動しないものに作り替える
+//Bullet_tut
+
+num = 0;
+timeFrame = 0;
+$bulletNum = true;
+
+this.label = new Label {
+    text: num,
+    x: x,
+    y: y,
+    size: 20,
+    color: "white"
+};
+
+this.value = num;
+
+//print("BULLET created: x=" + x + " y=" + y + " value=" + this.value);
+
+while (y > 0) {
+    t = timeFrame % 21;
+
+    if (t == 0 && num < 5) {
+        num++;
+        this.value = num;
+        this.label.text = num;
+    }
+    
+    //print("BULLET loop: x=" + x + " y=" + y + " value=" + this.value);
+
+    d = crashTo(Enemy);
+    if (d) {
+
+        // 計算を先に！
+        result = num + d.value;
+
+        print(
+        "BULLET collision detect: bullet.num=" + num +
+        " bullet.value=" + this.value +
+        " enemy.value=" + d.value +
+        " result=" + result
+        );
+
+        if (result == $targetResult) {
+            $score++;
+            print("★正解！ score=" + $score);
+        } else {
+            print("×不正解 hp=" + $hp);
+        }
+
+        // 次の問題
+        $targetResult = rnd(2, 14);
+        
+        
+        if ($infoLabel) {
+            $infoLabel.text =
+            "答え: " + $targetResult +
+            "\n弾速: " + $bulletSpeed +
+            "\nScore: " + $score +
+            "\nHP: " + $hp;
+        }
+        $bulletNum = false;
+
+        if (this.label) this.label.die();
+        if (d.label) d.label.die();
+        d.die();
+        die();
+    }
+
+    y -= $bulletSpeed;  // ← 可変弾速にも対応させると良い
+    this.label.x = x;
+    this.label.y = y;
+    timeFrame++;
+    update();
+}
+
+if (this.label) this.label.die();
+$bulletNum = false;
+die();
