@@ -1,5 +1,5 @@
 //初期設定ページ
-$title="四則演算シューティング（未定）";
+$title="タイトルを入力";
 $Screen.setBGColor("black");
 $Screen.resize(640,480);
 
