@@ -58,17 +58,19 @@ new Button{
 
 //ランク判定
 \getRank(score) {
-    if (score < 50) return "E";
-    if (score < 70) return "E+";
-    if (score < 100) return "D";
-    if (score < 150) return "D+";
-    if (score < 200) return "C";
-    if (score < 260) return "C+";
-    if (score < 330) return "B";
-    if (score < 400) return "B+";
-    if (score < 480) return "A";
-    if (score < 550) return "A+";
-    return "S"; 
+    if (score < 30) return "E";
+    if (score < 50) return "E+";
+    if (score < 80) return "D";
+    if (score < 100) return "D+";
+    if (score < 130) return "C";
+    if (score < 150) return "C+";
+    if (score < 180) return "B";
+    if (score < 200) return "B+";
+    if (score < 240) return "A";
+    if (score < 280) return "A+";
+    if (score < 320) return "S";
+    if (score < 360) return "S+";
+    return "SS"; 
 }
 
 
