@@ -47,7 +47,7 @@ while (y > -50) {
     e = crashTo(Enemy);
     if (e) {
         res = this.value + e.value;
-        if (res == $target) $score = $score + 1;
+        if (res == $target) $score = $score + 10;
         else $hp = $hp - 1; // ここでHPが減る
 
         // クリーンアップ処理（弾や敵を消す）
