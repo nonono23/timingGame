@@ -2,7 +2,7 @@
 new Label{
     text=$title, 
     x=$screenWidth/2,
-    y=100,
+    y=150,
     size=35,
     color="white",
 };
@@ -34,17 +34,6 @@ new Button{
 
 
 
-//test用,本番では削除
-new Button{
-    text="test",
-    top=280,
-    width=350,
-    left=160,
-    onClick=warp2,
-};
-\warp2() {
-    new FadeEffect{type="out",page=Result};
-}
 
 
 

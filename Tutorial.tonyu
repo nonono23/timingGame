@@ -1,14 +1,4 @@
-//チュートリアル
-$int="まだできてない、タイトル戻って💦\n\n 弾を打つとログが残り続けるから\nこの画面でまだ打たないで";
-
-//表示
-new Label{
-    text=$int, 
-    x=$screenWidth/2,
-    y=100,
-    size=35,
-    color="white",
-};
+//チュート
 
 //タイトルへ
 new Button{
@@ -24,32 +14,72 @@ new Button{
 
 
 
-
+//チュートリアル実行部分
+// チュートリアル実行部分
 $Screen.resize(640,480);
-$targetResult = rnd(2,14); 
-$score = 0;                  
-$hp = 3;                     
-$bulletSpeed = 6;   
-//print("MAIN start: target=" + $targetResult + " score=" + $score + " hp=" + $hp + " bulletspeed=" + $bulletSpeed);
+$enemyList = [];      
+$bulletAlive = false; 
+$currentBullet = null; 
+$score = 0;
 
-$infoLabel = new Label { 
-    text: "",
-    x: 520, 
-    y: 20,
-size: 18};
+// HPは表示用のダミー（無制限）
+$hp = 9999;
 
-$infoLabel.text = "答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
+$bulletSpeed = 6;
+$target = 0;
 
-new Player_tut { x: 200, y: 430, p: 26 };
+$problemLabel = new Label { x:470, y:20, size:18, color:"yellow" };
+$infoLabel    = new Label { x:470, y:60, size:16, color:"white" };
+$lanes = [80,140,200,260,320];
 
-c=0;
-while(true){
-    if(c%60==0){
-        new Enemy{x=0,y=rnd(20,150)};
+// ===============================
+// 関数定義（省略せずにそのまま）
+// ===============================
+
+$genProblem = function () {
+    a = rnd(1,5);
+    b = rnd(1,5);
+    $target = a + b;
+    $problemLabel.text = "敵と弾の数値で " + $target + " を作れ！";
+};
+
+$spawnEnemies = function () {
+    tmp = $enemyList.slice();
+    for (e in tmp) {
+        if (e && e.label) e.label.die();
+        if (e) e.die();
     }
+    $enemyList = [];
+    vals = [1, 2, 3, 4, 5];
+    for (k = 0; k < 10; k++) {
+        r1 = rnd(0, 5); 
+        r2 = rnd(0, 5);
+        t = vals[r1]; 
+        vals[r1] = vals[r2]; 
+        vals[r2] = t;
+    }
+    for (i = 0; i < 5; i++) {
+        new Enemy { value: vals[i], laneY: $lanes[i] };
+    }
+};
+
+// ===============================
+// 初期化実行
+// ===============================
+
+$genProblem();
+$spawnEnemies();
+new Player { x:320, y:430 };
+
+// ===============================
+// メインループ（HP無制限版）
+// ===============================
+
+while (true) {
+    $infoLabel.text = 
+    "弾速: " + $bulletSpeed + 
+    "\nScore: " + $score + 
+    "\nHP: ∞";   // 無限表示
     
-    $infoLabel.text ="答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
-    
-    c++;
     update();
 }

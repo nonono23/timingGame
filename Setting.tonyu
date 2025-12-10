@@ -1,5 +1,5 @@
 //初期設定ページ
-$title="タイトルを入力";
+$title="足し算シューティング";
 $Screen.setBGColor("black");
 $Screen.resize(640,480);
 
