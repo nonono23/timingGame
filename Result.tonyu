@@ -1,6 +1,6 @@
 //結果画面
-score = 428;
-rank=getRank(score);
+//score = 428;
+rank=getRank($score);
 
 // RESULT タイトル
 new Label {
@@ -13,7 +13,7 @@ new Label {
 
 // スコア表示
 new Label {
-    text="SCORE: " + score,
+    text="SCORE: " + $score,
     size=40,
     color="white",
     x=$screenWidth/2,

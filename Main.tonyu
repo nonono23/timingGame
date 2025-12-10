@@ -57,25 +57,5 @@ while ($hp > 0) {
 
 // --- ここに来るのはループを抜けた時（つまりHPが0以下） ---
 
-// 全オブジェクトを止めるなどの処理はお好みですが、
-// シンプルにでっかく表示を出します
-new Label { 
-    text: "GAME OVER", 
-    x: 320, y: 200, 
-    size: 60, 
-    fillStyle: "red" 
-};
-new Label { 
-    text: "Press R to Restart", 
-    x: 320, y: 300, 
-    size: 30, 
-    fillStyle: "white" 
-};
 
-// Rキーが押されるまで待機
-while (getkey("r") == 0) {
-    update();
-}
-
-// リスタート（ページを読み直して初期化）
-loadPage(Main);
+loadPage(Result);
