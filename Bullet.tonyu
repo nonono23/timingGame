@@ -1,78 +1,92 @@
-//Bullet
-num = 0;
-timeFrame = 0;
-$bulletNum = true;
+// Bullet.tny
 
+// 位置は this.x / this.y で渡される
+x = this.x;
+y = this.y;
+
+// 初期値
+this.value = 1;
+this.maxValue = 5;
+
+// --- 変更点: 時間計測用の変数 ---
+this.timeCount = 0;
+this.growInterval = 30; // 何フレームで数値が上がるか（60フレーム=1秒）
+// ※ 20フレーム(約0.33秒)ごとに+1されます。この値を小さくすると成長が早くなります。
+
+// レンダラ
 this.label = new Label {
-    text: num,
+    text: this.value,
     x: x,
     y: y,
     size: 20,
-    color: "white"
+    fillStyle: "#000000"
 };
 
-this.value = num;
+// グローバル登録
+$bulletAlive = true;
+$currentBullet = this;
 
-//print("BULLET created: x=" + x + " y=" + y + " value=" + this.value);
+while (y > -50) {
 
-while (y > 0) {
-    t = timeFrame % 21;
+    // 移動（速度調整の影響を受ける）
+    y -= $bulletSpeed;
 
-    if (t == 0 && num < 5) {
-        num++;
-        this.value = num;
-        this.label.text = num;
+    // --- 変更点: 時間経過で成長判定 ---
+    this.timeCount++;
+
+    if (this.timeCount >= this.growInterval) {
+        this.timeCount = 0; // カウンタリセット
+        
+        if (this.value < this.maxValue) {
+            this.value = this.value + 1;
+            this.label.text = this.value;
+        }
     }
-    
-    //print("BULLET loop: x=" + x + " y=" + y + " value=" + this.value);
 
-    d = crashTo(Enemy);
-    if (d) {
+    // 当たり判定 (変更なし)
+    e = crashTo(Enemy);
+    if (e) {
+        res = this.value + e.value;
+        if (res == $target) $score = $score + 1;
+        else $hp = $hp - 1; // ここでHPが減る
 
-        // 計算を先に！
-        result = num + d.value;
-
-        print(
-        "BULLET collision detect: bullet.num=" + num +
-        " bullet.value=" + this.value +
-        " enemy.value=" + d.value +
-        " result=" + result
-        );
-
-        if (result == $targetResult) {
-            $score++;
-            //print("★正解！ score=" + $score);
-        } else {
-            $hp--;
-            //print("×不正解 hp=" + $hp);
+        // クリーンアップ処理（弾や敵を消す）
+        if ($currentBullet) {
+            if ($currentBullet.label) $currentBullet.label.die();
+            if ($currentBullet != this) $currentBullet.die();
+            $currentBullet = null;
         }
+        $bulletAlive = false;
 
-        // 次の問題
-        $targetResult = rnd(2, 14);
-        
-        
-        if ($infoLabel) {
-            $infoLabel.text =
-            "答え: " + $targetResult +
-            "\n弾速: " + $bulletSpeed +
-            "\nScore: " + $score +
-            "\nHP: " + $hp;
+        tmp = $enemyList.slice();
+        for (ee in tmp) {
+            if (ee && ee.label) ee.label.die();
+            if (ee) ee.die();
         }
-        $bulletNum = false;
-
+        $enemyList = [];
+        
+        // 自分（弾）のラベルも消す
         if (this.label) this.label.die();
-        if (d.label) d.label.die();
-        d.die();
+
+        // --- 変更点: HPが残っている時だけ次へ進む ---
+        if ($hp > 0) {
+            $genProblem();
+            $spawnEnemies();
+        } 
+        // HPが0以下の場合は何もしない（Main側でループを抜けてGAME OVER処理へ行く）
+
         die();
     }
 
-    y -= $bulletSpeed;  // ← 可変弾速にも対応させると良い
+    // ラベル位置更新
     this.label.x = x;
     this.label.y = y;
-    timeFrame++;
+
     update();
 }
 
+// 画面外処理
 if (this.label) this.label.die();
-$bulletNum = false;
+$bulletAlive = false;
+$currentBullet = null;
 die();

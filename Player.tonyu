@@ -1,31 +1,27 @@
-// Player.tonyu
-//print("PLAYER init: x=" + this.x + " y=" + this.y);
+// Player.tny
+// this.x / this.y は new Player { x:..., y:... } で渡される
+
 while (true) {
-    // 移動処理
+    // 左右移動 (A / D)
     if (getkey("a") > 0) x -= 4.5;
     if (getkey("d") > 0) x += 4.5;
 
-    // 画面端制限
-    if (x > 460) x = 460;
-    if (x < 10) x = 10;
-    
-    //print("PLAYER pos: x=" + x + " y=" + y);
-    
-    if (getkey("w") == 1) {
-        $bulletSpeed++;
-        print("Bullet speed: " + $bulletSpeed);
-    }
-    if (getkey("s") == 1 && $bulletSpeed > 1) {
-        $bulletSpeed--;
-        print("Bullet speed: " + $bulletSpeed);
-    }
-    
-    
-    // 弾が存在しないときだけ発射
-    if (getkey("space") == 1 && !$bulletNum) {
-        new Bullet { x: x, y: y};
-        //print("PLAYER fires bullet at x=" + x + " y=" + y);
+    // 画面端で止める
+    if (x < 20) x = 20;
+    if (x > 620) x = 620;
 
+    // 弾速調整 (W / S)
+    if (getkey("w") == 1) {
+        $bulletSpeed = min(20, $bulletSpeed + 1);
+    }
+    if (getkey("s") == 1) {
+        $bulletSpeed = max(1, $bulletSpeed - 1);
+    }
+
+    // 発射（SPACE）: 画面内に弾が無ければ発射
+    if (getkey("space") == 1 && !$bulletAlive) {
+        new Bullet { x: x, y: y };
+        // 実インスタンスは Bullet.tny が $currentBullet に設定する
     }
 
     update();

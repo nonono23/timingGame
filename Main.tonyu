@@ -1,29 +1,81 @@
-//Main
+// Main.tny
+
+// （前半の初期化などはそのまま）
 $Screen.resize(640,480);
-$targetResult = rnd(2,14); 
-$score = 0;                  
-$hp = 3;                     
-$bulletSpeed = 6;   
-//print("MAIN start: target=" + $targetResult + " score=" + $score + " hp=" + $hp + " bulletspeed=" + $bulletSpeed);
+$enemyList = [];      
+$bulletAlive = false; 
+$currentBullet = null; 
+$score = 0;
+$hp = 5;
+$bulletSpeed = 6;
+$target = 0;
 
-$infoLabel = new Label { 
-    text: "",
-    x: 520, 
-    y: 20,
-size: 18};
+$problemLabel = new Label { x:470, y:20, size:18, color:"yellow" };
+$infoLabel    = new Label { x:470, y:60, size:16, color:"white" };
+$lanes = [80,140,200,260,320];
 
-$infoLabel.text = "答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
+// 関数定義（省略せずにそのまま記述してください）
+$genProblem = function () {
+    a = rnd(1,5);
+    b = rnd(1,5);
+    $target = a + b;
+    $problemLabel.text = "敵と弾の数値で " + $target + " を作れ！";
+};
 
-new Player { x: 200, y: 430, p: 26 };
-
-c=0;
-while(true){
-    if(c%60==0){
-        new Enemy{x=0,y=rnd(20,150)};
+$spawnEnemies = function () {
+    tmp = $enemyList.slice();
+    for (e in tmp) {
+        if (e && e.label) e.label.die();
+        if (e) e.die();
     }
+    $enemyList = [];
+    vals = [1, 2, 3, 4, 5];
+    for (k = 0; k < 10; k++) {
+        r1 = rnd(0, 5); r2 = rnd(0, 5);
+        t = vals[r1]; vals[r1] = vals[r2]; vals[r2] = t;
+    }
+    for (i = 0; i < 5; i++) {
+        new Enemy { value: vals[i], laneY: $lanes[i] };
+    }
+};
+
+// 初期化実行
+$genProblem();
+$spawnEnemies();
+new Player { x:320, y:430 };
+
+// --- 変更点: メインループ ---
+while ($hp > 0) {
+    // HPが残っている間はこのループ
+    $infoLabel.text = 
+    "弾速: " + $bulletSpeed + 
+    "\nScore: " + $score + 
+    "\nHP: " + $hp;
     
-    $infoLabel.text ="答え: " + $targetResult + "\n弾速: " + $bulletSpeed + "\nScore: " + $score + "\nHP: " + $hp;
-    
-    c++;
     update();
 }
+
+// --- ここに来るのはループを抜けた時（つまりHPが0以下） ---
+
+// 全オブジェクトを止めるなどの処理はお好みですが、
+// シンプルにでっかく表示を出します
+new Label { 
+    text: "GAME OVER", 
+    x: 320, y: 200, 
+    size: 60, 
+    fillStyle: "red" 
+};
+new Label { 
+    text: "Press R to Restart", 
+    x: 320, y: 300, 
+    size: 30, 
+    fillStyle: "white" 
+};
+
+// Rキーが押されるまで待機
+while (getkey("r") == 0) {
+    update();
+}
+
+// リスタート（ページを読み直して初期化）
+loadPage(Main);

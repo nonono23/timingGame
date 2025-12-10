@@ -1,52 +1,46 @@
-x = this.x;
-y = this.y;
+// Enemy.tny
+// new Enemy { value: <1..5>, laneY: <y> } で生成される
 
-// 敵が持つ数値（1〜9）
-this.value = rnd(1,9);
+// 初期位置：横はランダム、yは渡された laneY を使う
+x = rnd(60, 580);
+y = this.laneY;
 
-// 表示ラベル
+// 受け取った値を優先（なければランダム）
+if (!this.value) this.value = rnd(1,5);
+
+// ラベル表示
 this.label = new Label {
     text: this.value,
     x: x,
     y: y,
     size: 28,
-    color: "white"
+    fillStyle: "#000000"
 };
 
+// グローバルリストに登録（Main が参照）
+if (!$enemyList) $enemyList = [];
+$enemyList.push(this);
 
-//print("ENEMY created: value=" + this.value + " x=" + x + " y=" + y);
+// 個体ごとの速度（1〜5）
+speed = rnd(1,10);
+// 向きランダム（1 = 右, -1 = 左）
+dir = (rnd(0,1) == 1) ? 1 : -1;
 
 while (true) {
-    x += 3;
+    // 横移動のみ
+    x += speed * dir;
+
+    // 端で反転（画面外に出さない）
+    if (x < 30) dir = 1;
+    if (x > 610) dir = -1;
+
+    // ラベル更新
     this.label.x = x;
     this.label.y = y;
-    
-    //print("ENEMY loop: x=" + x + " y=" + y + " value=" + this.value);
-
-    // 弾との当たり判定
-    /*b = crashTo(Bullet);
-    if (b) {
-
-        print("ENEMY collision detect: enemy.value=" + this.value +
-        " b.value=" + b.value + " enemy.x=" + x + " enemy.y=" + y);
-
-        result = this.value + b.value;
-        print("Enemy(" + this.value + ") + Bullet(" + b.value + ") = " + result);
-
-        if (b.label) b.label.die();
-
-        $bulletNum = false;
-        b.die();
-        this.label.die();
-        die();
-    }*/
-
-    // 画面外に出たら削除
-    if (x > screenWidth + 50) {
-        $bulletNum = false;
-        if(this.label) this.label.die();
-        die();
-    }
 
     update();
 }
+
+// （通常ここには来ないが念のため）クリーンアップ
+if (this.label) this.label.die();
+die();
